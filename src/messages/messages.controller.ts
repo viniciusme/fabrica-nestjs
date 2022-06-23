@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Post,
   Put,
@@ -22,7 +23,9 @@ export class MessagesController {
   @Get(':id')
   findById(@Param() params) {
     console.log(params.id, typeof params.id);
-    return this.messagesService.findById(+params.id);
+    return this.messagesService.findById(+params.id).catch((e) => {
+      throw new NotFoundException(e.message);
+    });
   }
 
   @Post()
