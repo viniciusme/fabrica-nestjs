@@ -1,5 +1,13 @@
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { MessagesService } from './messages.service';
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { Message } from './Message';
 
 @Controller('messages')
@@ -25,5 +33,11 @@ export class MessagesController {
   @Put(':id')
   update(@Param() params, @Body() message: Message) {
     return this.messagesService.update(+params.id, message);
+  }
+
+  @Delete(':id')
+  delete(@Param() params) {
+    console.log(params.id);
+    return this.messagesService.delete(+params.id);
   }
 }
