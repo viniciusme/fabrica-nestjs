@@ -43,6 +43,8 @@ export class MessagesController {
   @Delete(':id')
   delete(@Param() params) {
     console.log(params.id);
-    return this.messagesService.delete(+params.id);
+    return this.messagesService.delete(+params.id).catch((e) => {
+      throw new NotFoundException(e.message);
+    });
   }
 }
